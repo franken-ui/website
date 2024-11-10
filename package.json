@@ -10,13 +10,17 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/check": "^0.9.1",
-    "astro": "^4.13.1",
-    "franken-ui": "^1.1.0",
+    "@astrojs/check": "^0.9.4",
+    "@astrojs/mdx": "^4.0.3",
+    "@types/node": "^22.9.0",
+    "astro": "^5.1.1",
+    "astro-expressive-code": "^0.38.3",
+    "franken-ui": "^2.0.0-internal.23",
     "postcss": "^8.4.40",
     "prettier": "^3.3.3",
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-tailwindcss": "^0.6.5",
+    "rehype-class-names": "^2.0.0",
     "tailwindcss": "^3.4.7",
     "typescript": "^5.5.4"
   }

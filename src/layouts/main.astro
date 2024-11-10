@@ -1,0 +1,253 @@
+---
+import Master from "./master.astro";
+import Carbon from "./partials/carbon.astro";
+import data from "layouts/partials/examples";
+
+const { doc } = Astro.props;
+---
+
+<Master doc={doc}>
+  <div class="flex min-h-screen flex-col" id="app">
+    <div class="flex-1">
+      <div class="uk-container uk-container-xl">
+        <div class="mt-10 grid min-h-40 grid-cols-1 gap-y-8 lg:grid-cols-2">
+          <div class="space-y-4">
+            <h1 class="uk-hero-sm font-bold">Franken UI: Dos</h1>
+            <p class="text-lg font-light">
+              Franken UI is an HTML-first, open-source library of UI components
+              that works as a standalone or as a Tailwind CSS plugin.
+            </p>
+
+            <div class="flex gap-x-1">
+              <a class="uk-btn uk-btn-primary" href="/docs/2.0/introduction">
+                Learn
+              </a>
+              <div class="uk-btn-group">
+                <a
+                  class="uk-btn uk-btn-default"
+                  href="https://github.com/sponsors/sveltecult"
+                  target="_blank"
+                >
+                  <span class="mr-2 size-4 text-pink-500">
+                    <uk-icon icon="heart"></uk-icon>
+                  </span>
+                  Support
+                </a>
+                <div class="uk-inline">
+                  <button class="uk-btn uk-btn-default uk-btn-icon">
+                    <span class="size-4">
+                      <uk-icon icon="chevron-down"></uk-icon>
+                    </span>
+                  </button>
+                  <div
+                    class="uk-drop uk-dropdown min-w-52"
+                    data-uk-dropdown="mode: click; pos: bottom-right"
+                  >
+                    <ul class="uk-dropdown-nav uk-nav">
+                      <li class="uk-nav-header">Source code</li>
+                      {
+                        [
+                          "franken-ui/ui",
+                          "franken-ui/webc",
+                          "franken-ui/frames",
+                        ].map((a) => (
+                          <li>
+                            <a href={`https://github.com/${a}`} target="_blank">
+                              <uk-icon icon="star" />
+                              <span class="ml-2">{a}</span>
+                            </a>
+                          </li>
+                        ))
+                      }
+                      <li class="uk-nav-header">Templates</li>
+                      {
+                        [
+                          "franken-ui/template-astro",
+                          "franken-ui/template-html",
+                          "franken-ui/template-laravel",
+                          "franken-ui/template-react",
+                          "franken-ui/template-svelte",
+                          "franken-ui/template-sveltekit",
+                          "franken-ui/template-vue",
+                        ].map((a) => (
+                          <li>
+                            <a href={`https://github.com/${a}`} target="_blank">
+                              {a}
+                            </a>
+                          </li>
+                        ))
+                      }
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <button
+                class="uk-btn uk-btn-default uk-btn-icon"
+                data-uk-toggle="target: #theme"
+              >
+                <span class="size-4">
+                  <uk-icon icon="palette"></uk-icon>
+                </span>
+              </button>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-center lg:justify-end">
+            <Carbon />
+          </div>
+        </div>
+
+        <div class="mt-20 text-center font-light">
+          <div class="uk-hero-md">
+            Let's move forward. By stepping backwards.
+          </div>
+          <p class="mt-4 text-xl text-muted-foreground">
+            Today's UI, DX from days gone by.
+          </p>
+        </div>
+
+        <div class="mt-4 flex justify-center">
+          <div class="uk-btn-group">
+            <a
+              class="uk-btn uk-btn-secondary"
+              href="/docs/2.0/installation#installation-via-cdn"
+            >
+              <span class="mr-2 size-4">
+                <uk-icon icon="globe"></uk-icon>
+              </span>
+              CDN Installation
+            </a>
+            <div class="uk-inline">
+              <button class="uk-btn uk-btn-secondary uk-btn-icon">
+                <span class="size-4">
+                  <uk-icon icon="chevron-down"></uk-icon>
+                </span>
+              </button>
+              <div
+                class="uk-drop uk-dropdown min-w-52"
+                data-uk-dropdown="mode: click; pos: bottom-right"
+              >
+                <ul class="uk-dropdown-nav uk-nav">
+                  <li class="uk-nav-header">Browse Examples</li>
+                  {
+                    data.map((a) => (
+                      <li>
+                        <a
+                          class="uk-drop-close"
+                          href={`/examples/${a.slug}`}
+                          hx-get={`/examples/${a.slug}`}
+                          hx-select="#example"
+                          hx-target="#example"
+                          hx-swap="outerHTML"
+                        >
+                          {a.title}
+                        </a>
+                      </li>
+                    ))
+                  }
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <slot />
+
+        <div class="mt-20 text-center">
+          <div class="uk-h4">Supported by</div>
+          <p class="mt-1 text-muted-foreground">
+            Thanks to our amazing sponsors.
+          </p>
+        </div>
+        <div class="mx-auto mt-10 max-w-sm">
+          <div class="grid grid-cols-2 gap-x-2">
+            <div class="uk-rounded relative border border-border p-2">
+              <a
+                class="focus-visible:outline-dotted focus-visible:outline-ring"
+                href="https://answer.ai"
+                target="_blank"
+                data-uk-tooltip="Answer.ai"
+              >
+                <img
+                  class="h-full w-full object-contain"
+                  src="/images/sponsors/answerdotai.jpg"
+                  alt="Answer.ai"
+                />
+                <span class="absolute inset-0"></span>
+              </a>
+            </div>
+            <div class="flex flex-col justify-between gap-y-2">
+              <div
+                class="uk-rounded relative h-20 flex-1 border border-border bg-white p-2"
+              >
+                <a
+                  class="focus-visible:outline-dotted focus-visible:outline-ring"
+                  href="https://atuin.sh"
+                  target="_blank"
+                  data-uk-tooltip="Atuin.sh"
+                >
+                  <img
+                    class="h-full w-full object-contain"
+                    src="/images/sponsors/atuin.png"
+                    alt="Atuin.sh"
+                  />
+                  <span class="absolute inset-0"></span>
+                </a>
+              </div>
+              <div
+                class="uk-rounded relative h-20 flex-1 border border-border bg-white p-2"
+              >
+                <a
+                  class="focus-visible:outline-dotted focus-visible:outline-ring"
+                  href="https://ko-fi.com/sveltecult"
+                  target="_blank"
+                  data-uk-tooltip="Ko-Fi Supporters"
+                >
+                  <img
+                    class="h-full w-full object-contain"
+                    src="/images/sponsors/ko-fi.png"
+                    alt="Ko-Fi Supporters"
+                  />
+                  <span class="absolute inset-0"></span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="relative mt-2 h-16">
+            <a
+              class="uk-rounded flex h-full items-center justify-center border border-dashed border-border focus-visible:outline-dotted focus-visible:outline-ring"
+              href="https://github.com/sponsors/sveltecult"
+              target="_blank"
+              data-uk-tooltip="Become a sponsor"
+            >
+              <uk-icon icon="plus"></uk-icon>
+              <span class="absolute inset-0"></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex-none">
+      <footer class="uk-container uk-container-xl py-6">
+        <div class="flex flex-col items-center">
+          <p
+            class="text-balance text-center text-sm leading-loose text-muted-foreground md:text-left"
+          >
+            Happily maintained by <a
+              class="uk-link"
+              href="https://bsky.app/profile/sveltecult.bsky.social"
+              target="_blank">sveltecult</a
+            >, designed by <a
+              class="uk-link"
+              href="https://ui.shadcn.com"
+              target="_blank">shadcn</a
+            >.
+          </p>
+        </div>
+      </footer>
+    </div>
+  </div>
+</Master>

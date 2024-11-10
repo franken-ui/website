@@ -1,0 +1,337 @@
+---
+group: getting-started
+order: 5
+text: Theming
+title: Theming
+meta:
+  description: Using CSS Variables or Tailwind CSS for theming.
+---
+
+Franken UI, just like shadcn/ui use a simple `background` and `foreground` convention for colors. The `background` variable is used for the background color of the component and the `foreground` variable is used for the text color.
+
+The `background` suffix is omitted when the variable is used for the background color of the component.
+
+Given the following CSS variables:
+
+```css
+--primary: 222.2 47.4% 11.2%;
+--primary-foreground: 210 40% 98%;
+```
+
+The `background` color of the following component will be `hsl(var(--primary))` and the `foreground` color will be `hsl(var(--primary-foreground))`.
+
+```html
+<div class="bg-primary text-primary-foreground">Hello</div>
+```
+
+**CSS variables must be defined without color space function**. See the [Tailwind CSS documentation](https://tailwindcss.com/docs/customizing-colors#using-css-variables) for more information.
+
+## List of variables
+
+Here's the list of variables available for customization:
+
+**1\.** For default backgrounds
+
+```css
+--background: 0 0% 100%;
+--foreground: 222.2 47.4% 11.2%;
+```
+
+**2\.** For muted backgrounds
+
+```css
+--muted: 210 40% 96.1%;
+--muted-foreground: 215.4 16.3% 46.9%;
+```
+
+**3\.** Background color for cards
+
+```css
+--card: 0 0% 100%;
+--card-foreground: 222.2 47.4% 11.2%;
+```
+
+**4\.** Background color for popovers
+
+```css
+--popover: 0 0% 100%;
+--popover-foreground: 222.2 47.4% 11.2%;
+```
+
+**5\.** For border color
+
+```css
+--border: 214.3 31.8% 91.4%;
+```
+
+**6\.** Border color for inputs
+
+```css
+--input: 214.3 31.8% 91.4%;
+```
+
+**7\.** For primary colors
+
+```css
+--primary: 222.2 47.4% 11.2%;
+--primary-foreground: 210 40% 98%;
+```
+
+**8\.** For secondary colors
+
+```css
+--secondary: 210 40% 96.1%;
+--secondary-foreground: 222.2 47.4% 11.2%;
+```
+
+**9\.** For accents such as hover effects
+
+```css
+--accent: 210 40% 96.1%;
+--accent-foreground: 222.2 47.4% 11.2%;
+```
+
+**10\.** For destructive actions
+
+```css
+--destructive: 0 100% 50%;
+--destructive-foreground: 210 40% 98%;
+```
+
+**11\.** For focus ring
+
+```css
+--ring: 215 20.2% 65.1%;
+```
+
+## Adding new colors
+
+To add new colors, you need to add them to your CSS file and to your `tailwind.config.js` file.
+
+```css
+:root {
+  --warning: 38 92% 50%;
+  --warning-foreground: 48 96% 89%;
+}
+
+.dark {
+  --warning: 48 96% 89%;
+  --warning-foreground: 38 92% 50%;
+}
+```
+
+Then, on your `tailwind.config.js` file:
+
+```js
+module.exports = {
+  theme: {
+    extend: {
+      colors: {
+        warning: "hsl(var(--warning))",
+        "warning-foreground": "hsl(var(--warning-foreground))",
+      },
+    },
+  },
+};
+```
+
+You can now use the `warning` utility class in your components.
+
+```html
+<div class="bg-warning text-warning-foreground"></div>
+```
+
+## Custom palette
+
+Franken UI supports shadcn/ui theme generators. You can even create your own from scratch. To generate a theme, follow these steps:
+
+**1\.** Go to [ZippyStarter](https://zippystarter.com/tools/shadcn-ui-theme-generator), [Oxidus](https://oxidus.vercel.app/) or [https://ui.jln.dev/](https://ui.jln.dev/) and generate your desired theme. Copy the generated theme. Note that you can omit the `--radius` variable as it is not needed.
+
+**2\.** Convert the CSS to an object [using this tool](https://transform.tools/css-to-js). It's important to follow the correct format and naming convention.
+
+Here's an example of the CSS:
+
+```css
+:root  {
+  --background: 160.1 100% 95%;
+  --foreground: 160.1 5% 10%;
+  --card: 160.1 50% 90%;
+  --card-foreground: 160.1 5% 15%;
+  --popover: 160.1 100% 95%;
+  --popover-foreground: 160.1 100% 10%;
+  --primary: 160.1 84.1% 39.4%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 160.1 30% 70%;
+  --secondary-foreground: 0 0% 0%;
+  --muted: 122.1 30% 85%;
+  --muted-foreground: 160.1 5% 35%;
+  --accent: 122.1 30% 80%;
+  --accent-foreground: 160.1 5% 15%;
+  --destructive: 0 100% 30%;
+  --destructive-foreground: 160.1 5% 90%;
+  --border: 160.1 30% 50%;
+  --input: 160.1 30% 26%;
+  --ring: 160.1 84.1% 39.4%;
+  --radius: 0.5rem;
+}
+.dark  {
+  --background: 160.1 50% 10%;
+  --foreground: 160.1 5% 90%;
+  --card: 160.1 50% 10%;
+  --card-foreground: 160.1 5% 90%;
+  --popover: 160.1 50% 5%;
+  --popover-foreground: 160.1 5% 90%;
+  --primary: 160.1 84.1% 39.4%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 160.1 30% 20%;
+  --secondary-foreground: 0 0% 100%;
+  --muted: 122.1 30% 25%;
+  --muted-foreground: 160.1 5% 60%;
+  --accent: 122.1 30% 25%;
+  --accent-foreground: 160.1 5% 90%;
+  --destructive: 0 100% 30%;
+  --destructive-foreground: 160.1 5% 90%;
+  --border: 160.1 30% 26%;
+  --input: 160.1 30% 26%;
+  --ring: 160.1 84.1% 39.4%;
+  --radius: 0.5rem;
+}
+```
+
+Once you have transformed that to an object, you should rename `:root` with `.uk-theme-*` and `.dark` with `.dark.uk-theme-*` where `*` is the name of your palette, resulting in a structure like this:
+
+```javascript
+".uk-theme-emerald": {
+  "--background": "160.1 100% 95%",
+  "--foreground": "160.1 5% 10%",
+  "--card": "160.1 50% 90%",
+  "--card-foreground": "160.1 5% 15%",
+  "--popover": "160.1 100% 95%",
+  "--popover-foreground": "160.1 100% 10%",
+  "--primary": "160.1 84.1% 39.4%",
+  "--primary-foreground": "0 0% 100%",
+  "--secondary": "160.1 30% 70%",
+  "--secondary-foreground": "0 0% 0%",
+  "--muted": "122.1 30% 85%",
+  "--muted-foreground": "160.1 5% 35%",
+  "--accent": "122.1 30% 80%",
+  "--accent-foreground": "160.1 5% 15%",
+  "--destructive": "0 100% 30%",
+  "--destructive-foreground": "160.1 5% 90%",
+  "--border": "160.1 30% 50%",
+  "--input": "160.1 30% 26%",
+  "--ring": "160.1 84.1% 39.4%",
+},
+".dark.uk-theme-emerald": {
+  "--background": "160.1 50% 10%",
+  "--foreground": "160.1 5% 90%",
+  "--card": "160.1 50% 10%",
+  "--card-foreground": "160.1 5% 90%",
+  "--popover": "160.1 50% 5%",
+  "--popover-foreground": "160.1 5% 90%",
+  "--primary": "160.1 84.1% 39.4%",
+  "--primary-foreground": "0 0% 100%",
+  "--secondary": "160.1 30% 20%",
+  "--secondary-foreground": "0 0% 100%",
+  "--muted": "122.1 30% 25%",
+  "--muted-foreground": "160.1 5% 60%",
+  "--accent": "122.1 30% 25%",
+  "--accent-foreground": "160.1 5% 90%",
+  "--destructive": "0 100% 30%",
+  "--destructive-foreground": "160.1 5% 90%",
+  "--border": "160.1 30% 26%",
+  "--input": "160.1 30% 26%",
+  "--ring": "160.1 84.1% 39.4%",
+}
+```
+
+**3\.** Finally, configure your `tailwind.config.css` to add the custom palette. You will do this inside the `customPalette` option.
+
+```javascript
+import franken from "franken-ui/shadcn-ui/preset-quick";
+
+/** @type {import('tailwindcss').Config} */
+export default {
+  presets: [
+    franken({
+      customPalette: {
+        ".uk-theme-emerald": {
+          "--background": "160.1 100% 95%",
+          "--foreground": "160.1 5% 10%",
+          "--card": "160.1 50% 90%",
+          "--card-foreground": "160.1 5% 15%",
+          "--popover": "160.1 100% 95%",
+          "--popover-foreground": "160.1 100% 10%",
+          "--primary": "160.1 84.1% 39.4%",
+          "--primary-foreground": "0 0% 100%",
+          "--secondary": "160.1 30% 70%",
+          "--secondary-foreground": "0 0% 0%",
+          "--muted": "122.1 30% 85%",
+          "--muted-foreground": "160.1 5% 35%",
+          "--accent": "122.1 30% 80%",
+          "--accent-foreground": "160.1 5% 15%",
+          "--destructive": "0 100% 30%",
+          "--destructive-foreground": "160.1 5% 90%",
+          "--border": "160.1 30% 50%",
+          "--input": "160.1 30% 26%",
+          "--ring": "160.1 84.1% 39.4%",
+        },
+        ".dark.uk-theme-emerald": {
+          "--background": "160.1 50% 10%",
+          "--foreground": "160.1 5% 90%",
+          "--card": "160.1 50% 10%",
+          "--card-foreground": "160.1 5% 90%",
+          "--popover": "160.1 50% 5%",
+          "--popover-foreground": "160.1 5% 90%",
+          "--primary": "160.1 84.1% 39.4%",
+          "--primary-foreground": "0 0% 100%",
+          "--secondary": "160.1 30% 20%",
+          "--secondary-foreground": "0 0% 100%",
+          "--muted": "122.1 30% 25%",
+          "--muted-foreground": "160.1 5% 60%",
+          "--accent": "122.1 30% 25%",
+          "--accent-foreground": "160.1 5% 90%",
+          "--destructive": "0 100% 30%",
+          "--destructive-foreground": "160.1 5% 90%",
+          "--border": "160.1 30% 26%",
+          "--input": "160.1 30% 26%",
+          "--ring": "160.1 84.1% 39.4%",
+        },
+      },
+    }),
+  ],
+};
+```
+
+## Setting the default palette
+
+To set your newly added palette as the default, simply update the script in your `<head>` tag to reference the new theme name, like so:
+
+```html
+<script>
+  const htmlElement = document.documentElement;
+
+  const __FRANKEN__ = JSON.parse(
+    localStorage.getItem("__FRANKEN__") || "{}",
+  );
+
+  if (
+    __FRANKEN__.mode === "dark" ||
+    (!__FRANKEN__.mode &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches)
+  ) {
+    htmlElement.classList.add("dark");
+  } else {
+    htmlElement.classList.remove("dark");
+  }
+
+  htmlElement.classList.add(__FRANKEN__.theme || "uk-theme-emerald");
+  htmlElement.classList.add(__FRANKEN__.radii || "uk-radii-md");
+  htmlElement.classList.add(__FRANKEN__.shadows || "uk-shadows-sm");
+  htmlElement.classList.add(__FRANKEN__.font || "uk-font-sm");
+</script>
+```
+
+## Adding to theme switcher
+
+To register your newly added palette with the [Theme Switcher](/docs/2.0/theme-switcher#custom-palette), please refer to the corresponding documentation or guide for step-by-step instructions on how to integrate it.

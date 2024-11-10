@@ -1,0 +1,172 @@
+---
+group: components
+text: Form
+title: Form
+lead: Easily create nice looking forms with different styles and layouts.
+meta:
+  description: Easily create nice looking forms with different styles and layouts.
+keywords: "input,select,textarea,radio,checkbox,range,toggle switch,range"
+ping: true
+---
+
+import Snippet from "snippets/component.astro";
+
+## Usage
+
+Add one of the following classes to form controls inside a `<form>` element to define them.
+
+| Class               | Description                                                                     |
+| ------------------- | ------------------------------------------------------------------------------- |
+| `.uk-input`         | Add this class to `<input>` elements.                                           |
+| `.uk-select`        | Add this class to `<select>` elements.                                          |
+| `.uk-textarea`      | Add this class to `<textarea>` elements.                                        |
+| `.uk-radio`         | Add this class to `<input type="radio">` elements to create radio buttons.      |
+| `.uk-checkbox`      | Add this class to `<input type="checkbox">` elements to create checkboxes.      |
+| `.uk-range`         | Add this class to `<input type="range">` elements to create range forms.        |
+| `.uk-toggle-switch` | Add this class to `<input type="checkbox">` elements to create toggle switches. |
+
+```html
+<form>
+  <input class="uk-input" type="text" />
+  <select class="uk-select">
+    <option></option>
+    <option></option>
+  </select>
+  <textarea class="uk-textarea"></textarea>
+  <input class="uk-radio" type="radio" />
+  <input class="uk-checkbox" type="checkbox" />
+  <input class="uk-range" type="range" />
+</form>
+```
+
+Add the `.uk-fieldset` class to a `<fieldset>` element and the `.uk-legend` class to a `<legend>` element to define a fieldset and a form legend.
+
+<Snippet component="form.basic" />
+
+## Destructive modifier
+
+Add the `.uk-form-destructive` class to an `<input>`, `<select>` or `<textarea>` element to notify the user that the value is not validated.
+
+<Snippet component="form.danger" />
+
+## Size modifiers
+
+There are several size modifiers available. Just add one of the following classes to make the form smaller or larger.
+
+| Class         | Description               |
+| ------------- | ------------------------- |
+| `.uk-form-xs` | Applies extra small size. |
+| `.uk-form-sm` | Applies small size.       |
+| `.uk-form-lg` | Applies large size.       |
+| `.uk-form-xl` | Applies extra large size. |
+
+<Snippet component="form.size" />
+
+## Width modifiers
+
+You can use Tailwind CSS utility classes alongside form classes and the it will follow its width.
+
+<Snippet component="form.width" />
+
+## Blank modifier
+
+Add the `.uk-form-blank` class to minimize the styling of form controls.
+
+<Snippet component="form.blank" />
+
+## Layout
+
+Define labels and controls and apply a stacked or horizontal layout to form elements. Layout modifiers can be added to any parent element like the `<fieldset>` element. This makes it possible to have different form layouts for each fieldset.
+
+| Class                 | Description                                                 |
+| --------------------- | ----------------------------------------------------------- |
+| `.uk-form-stacked`    | Add this class to display labels on top of controls.        |
+| `.uk-form-horizontal` | Add this class to display labels and controls side by side. |
+| `.uk-form-label`      | Add this class to define form labels.                       |
+| `.uk-form-controls`   | Add this class to define form controls.                     |
+
+```html
+<form class="uk-form-stacked">
+  <div>
+    <label class="uk-form-label"></label>
+    <div class="uk-form-controls">…</div>
+  </div>
+  <div>
+    <div class="uk-form-label"></div>
+    <div class="uk-form-controls">…</div>
+  </div>
+</form>
+```
+
+<Snippet component="form.layout" />
+
+### Horizontal form
+
+Use the `.uk-form-controls-text` class to better align checkboxes and radio buttons when using them with text in a horizontal layout.
+
+```html
+<form class="uk-form-horizontal">
+  <div>
+    <label class="uk-form-label"></label>
+    <div class="uk-form-controls">…</div>
+  </div>
+  <div>
+    <div class="uk-form-label"></div>
+    <div class="uk-form-controls uk-form-controls-text">…</div>
+  </div>
+</form>
+```
+
+<Snippet component="form.horizontal" />
+
+## Form and icons
+
+You use an icon from the [Icon component](/docs/2.0/icon) inside a form. Add the `.uk-form-icon` class to a `<span>` element. Group it with an `<input>` element by adding the `.uk-inline` class from the [Utility component](utility.md#inline) to a container element around both. The icon has to come first in the markup. By default, the icon will be placed on the left side of the form. To change the alignment, add the `.uk-form-icon-flip` class.
+
+```html
+<div class="uk-inline">
+  <span class="uk-form-icon">
+    <uk-icon icon="user"></uk-icon>
+  </span>
+  <input class="uk-input" />
+</div>
+```
+
+<Snippet component="form.icon" />
+
+### Clickable icons
+
+To enable an action, for example opening a modal to pick an image or link, use an `<a>` or `<button>` element to create the icon.
+
+```html
+<div class="uk-inline">
+  <a class="uk-form-icon uk-form-icon-flip" href="">
+    <uk-icon icon="user"></uk-icon>
+  </a>
+  <input class="uk-input" />
+</div>
+```
+
+<Snippet component="form.clickable_icon" />
+
+## Help block
+
+Form text can be created using `.uk-form-help` and should be explicitly associated with the form control it relates to using the `aria-describedby` attribute. This will ensure that assistive technologies—such as screen readers—will announce this form text when the user focuses or enters the control.
+
+<Snippet component="form.help_block" />
+
+## Toggle Switch
+
+Use the following toggle switch component to ask for a yes or no type of input from your users without the use of JavaScript. You can also add the the `.uk-toggle-switch-destructive` modifier to apply a destructive style.
+
+<Snippet component="form.toggle_switch" />
+
+## Accessibility
+
+Set the appropriate WAI-ARIA roles, states and properties to the Form component.
+
+- If no `<label>` element is associated with the form control, set the `aria-label` property to the form control to describe its meaning.
+
+```html
+<input class="uk-input" type="text" aria-label="..." />
+```

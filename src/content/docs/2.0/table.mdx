@@ -1,0 +1,185 @@
+---
+group: components
+text: Table
+title: Table
+lead: Easily create nice looking tables, which come in different styles.
+meta:
+  description: Easily create nice looking tables, which come in different styles.
+---
+
+import Snippet from "snippets/component.astro";
+
+## Usage
+
+To apply this component, add the `.uk-table` class to a `<table>` element.
+
+```html
+<table class="uk-table">
+  <caption></caption>
+  <thead>
+    <tr>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td></td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td></td>
+    </tr>
+  </tfoot>
+</table>
+```
+
+<Snippet component="table.basic" />
+
+## Divider modifier
+
+Add the `.uk-table-divider` class to display a divider between table rows.
+
+```html
+<table class="uk-table uk-table-divider">
+  <!-- ... -->
+</table>
+```
+
+<Snippet component="table.divider" />
+
+## Striped modifier
+
+Add zebra-striping to a table by adding the `.uk-table-striped` class.
+
+```html
+<table class="uk-table uk-table-striped">
+  <!-- ... -->
+</table>
+```
+
+<Snippet component="table.striped" />
+
+## Hover modifier
+
+Add the `.uk-table-hover` class to display a hover state on table rows.
+
+```html
+<table class="uk-table uk-table-hover">
+  <!-- ... -->
+</table>
+```
+
+<Snippet component="table.hover" />
+
+## Size modifiers
+
+Add the `.uk-table-sm` or `.uk-table-lg` class to a table to make it smaller or larger.
+
+```html
+<table class="uk-table uk-table-sm">
+  <!-- ... -->
+</table>
+```
+
+<Snippet component="table.size" />
+
+## Justify modifier
+
+To remove the outer padding of the first and last columns so that they are flush with the table, add the `.uk-table-justify` class.
+
+```html
+<table class="uk-table uk-table-justify">
+  <!-- ... -->
+</table>
+```
+
+<Snippet component="table.justify" />
+
+## Alignment modifier
+
+To vertically center table content, just add the `.uk-table-middle` class. You can also apply the class to `<tr>` or `<td>` elements for a more specific selection.
+
+```html
+<table class="uk-table uk-table-middle">
+  <!-- ... -->
+</table>
+```
+
+<Snippet component="table.alignment" />
+
+## Responsive table
+
+If your table happens to be wider than its container element or would eventually get too big on a specific viewport width, just wrap it inside a `<div>` element and add the `.uk-overflow-auto` class from the [Utility component](utility.md#overflow). This creates a container that provides a horizontal scrollbar whenever the elements inside it are wider than the container itself.
+
+```html
+<div class="uk-overflow-auto">
+  <table class="uk-table">
+    <!-- ... -->
+  </table>
+</div>
+```
+
+<Snippet component="table.responsive" />
+
+### Stack on small viewports
+
+If you want table columns to stack on small screens, add the `.uk-table-responsive` class.
+
+```html
+<table class="uk-table uk-table-responsive">
+  <!-- ... -->
+</table>
+```
+
+<Snippet component="table.stack" />
+
+<span class="uk-label uk-label-primary">Note</span> Resize the browser window to
+see the columns stack.
+
+## Column width modifier
+
+To modify the column width or content, you can use one of the following classes. You just need to add this class to one of the column cells. It's recommended on the header cell.
+
+| Class               | Description                                                                                                                |
+| ------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `.uk-table-shrink ` | Add this class to a `<th>` or `<td>` element to reduce the column width to fit its content.                                |
+| `.uk-table-expand`  | Add this class to a `<th>` or `<td>` element to expand the column width to fill the remaining space and apply a min-width. |
+| `.w-*`              | Add one of the width utility classes from Tailwind CSS to a `<th>` or `<td>` element to modify the column width.           |
+
+```html
+<th class="uk-table-shrink"></th>
+```
+
+<Snippet component="table.column_width" />
+
+## Utilities
+
+To optimize the display of table cells and their specific content, you can add one of the following classes.
+
+| Class                 | Description                                                                                                                                                                                                                                   |
+| --------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `.uk-table-link`      | To link an entire cell, add this class to a `<th>`or `<td>` element and insert an `<a>` element. Add the `.uk-link-reset`class from the [Link component](/docs/2.0/link) to reset the default link styling.                                       |
+| `.uk-preserve-width ` | Since images are responsive by default in UIkit, using an image inside a table cell with the `.uk-table-shrink` class would reduce the image width to 0. To prevent this behavior, add the `.uk-preserve-width` class to the `<img>` element. |
+| `.uk-text-truncate`   | When applying a fixed width to a table cell, you might want to add this class from the [Text component](/docs/2.0/text) to the `<td>` element to truncate the text.                                                                               |
+| `.text-nowrap`        | Add this class from the Tailwind CSS to keep text from wrapping, for example when using the `.uk-table-shrink` class.                                                                                                                         |
+
+```html
+<!-- Table link -->
+<td class="uk-table-link">
+  <a class="uk-link-reset" href=""></a>
+</td>
+
+<!-- Preserve width -->
+<td>
+  <img class="uk-preserve-width" src="" width="" height="" alt="" />
+</td>
+
+<!-- Text truncate -->
+<td class="uk-text-truncate"></td>
+
+<!-- Text nowrap -->
+<td class="uk-text-nowrap"></td>
+```
+
+<Snippet component="table.utilities" />

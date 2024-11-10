@@ -1,0 +1,410 @@
+---
+import { resolve } from "node:path";
+import { readFileSync } from "node:fs";
+import { getCollection, getEntry, render } from "astro:content";
+import Master from "layouts/master.astro";
+import Carbon from "layouts/partials/carbon.astro";
+import examples from "layouts/partials/examples";
+
+type Group = {
+  href: string;
+  text: string;
+  keywords: string | undefined;
+  ping: boolean | undefined;
+  submenu:
+    | {
+        href: string;
+        text: string;
+        target?: "_self" | "_blank" | "_parent" | "_top" | undefined;
+      }[]
+    | undefined;
+  order: number | undefined;
+};
+
+const { version, id } = Astro.props;
+
+const docs = await getCollection("2.0");
+const groups: {
+  prologue: Group[];
+  "getting-started": Group[];
+  components: Group[];
+} = {
+  prologue: [],
+  "getting-started": [],
+  components: [],
+};
+
+docs.forEach((a) => {
+  groups[a.data.group as "prologue" | "getting-started" | "components"].push({
+    href: a.id,
+    text: a.data.text,
+    keywords: a.data.keywords,
+    ping: a.data.ping,
+    submenu: a.data.submenu,
+    order: a.data.order,
+  });
+});
+
+const entry = await getEntry(version, id);
+const { Content, headings, remarkPluginFrontmatter } = await render(entry);
+
+const titleCase = function (string: string) {
+  return string
+    .split("-")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+};
+
+let franken = "1.0";
+
+try {
+  franken = JSON.parse(
+    readFileSync(resolve("package.json"), "utf-8"),
+  ).dependencies["franken-ui"].replace("^", "v");
+} catch (e) {}
+---
+
+<Master
+  doc={{
+    title: remarkPluginFrontmatter.title,
+    meta: remarkPluginFrontmatter.meta,
+  }}
+>
+  <div class="min-h-screen xl:mx-auto xl:max-w-8xl" id="app">
+    <aside class="aside-l">
+      <button
+        class="uk-btn uk-btn-default uk-btn-icon uk-btn-xs lg:hidden"
+        x-data
+        x-on:click="document.getElementById('app')?.classList.remove('with-aside')"
+      >
+        <uk-icon icon="x"></uk-icon>
+      </button>
+
+      <div class="mt-4">
+        <a class="search group" data-uk-toggle="#search">
+          <div class="flex flex-1 items-center">
+            <span class="mr-2 size-4">
+              <uk-icon icon="search"></uk-icon>
+            </span>
+            <span>Search</span>
+          </div>
+          <kbd
+            class="group-hover:border-accent-foreground/10 group-hover:text-accent-foreground"
+          >
+            ⌘ /
+          </kbd>
+        </a>
+        <uk-command id="cmd" key="/" toggle="search">
+          <select hidden>
+            {
+              Object.keys(groups).map((a) => (
+                <optgroup label={titleCase(a)}>
+                  {groups[a as "getting-started"].map((z: Group) => (
+                    <option
+                      data-icon="notebook-text"
+                      data-keywords={z.keywords}
+                      value={`/docs/${version}/${z.href}`}
+                    >
+                      {z.text}
+                    </option>
+                  ))}
+                </optgroup>
+              ))
+            }
+          </select>
+        </uk-command>
+        <script is:inline>
+          const cmd = document.getElementById("cmd");
+
+          cmd?.addEventListener("uk-command:click", (e) => {
+            location.href = e.detail.value.value;
+          });
+        </script>
+      </div>
+
+      <div class="mt-1">
+        <ul
+          class="uk-nav uk-nav-default -mx-1 mt-1"
+          data-uk-nav="collapsible: false"
+        >
+          <li class="uk-parent">
+            <a href="#">
+              Examples <span uk-nav-parent-icon></span>
+            </a>
+            <ul class="uk-nav-sub" hidden>
+              {
+                examples.map((a) => (
+                  <li>
+                    <a href={`/examples/${a.slug}`}>{a.title}</a>
+                  </li>
+                ))
+              }
+            </ul>
+          </li>
+          {
+            Object.keys(groups).map((a) => (
+              <li
+                class={`uk-parent ${entry.data.group === a ? "uk-open" : ""}`}
+              >
+                <a href="#">
+                  {titleCase(a)} <span uk-nav-parent-icon />
+                </a>
+                <ul class="uk-nav-sub" hidden={entry.data.group !== a}>
+                  {groups[a as "getting-started"]
+                    .sort((z: Group, y: Group) => {
+                      if (["prologue", "getting-started"].includes(a)) {
+                        return (z.order || 0) - (y.order || 0);
+                      }
+
+                      return 0;
+                    })
+                    .map((z: Group) => (
+                      <li class={` ${z.href === entry.id ? "uk-active" : ""}`}>
+                        <a
+                          class="flex items-center justify-between"
+                          href={`/docs/${version}/${z.href}`}
+                        >
+                          <span class="flex-1">{z.text}</span>
+                          {z.ping === true ? (
+                            <span class="relative flex h-2 w-2 flex-none">
+                              <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary/75" />
+                              <span class="relative inline-flex h-2 w-2 rounded-full bg-primary" />
+                            </span>
+                          ) : (
+                            ""
+                          )}
+                        </a>
+                        {z.submenu ? (
+                          <ul>
+                            {z.submenu.map((y) => (
+                              <li>
+                                <a
+                                  class="flex items-center justify-between"
+                                  href={y.href}
+                                  target={y.target || "_self"}
+                                >
+                                  <span class="flex-1">{y.text}</span>
+                                  {y.href.startsWith("http") ? (
+                                    <uk-icon icon="external-link" />
+                                  ) : (
+                                    ""
+                                  )}
+                                </a>
+                              </li>
+                            ))}
+                          </ul>
+                        ) : (
+                          ""
+                        )}
+                      </li>
+                    ))}
+                </ul>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div class="uk-card uk-card-primary mt-4">
+        <div class="uk-card-header">
+          <div class="uk-h4">Support</div>
+        </div>
+        <div class="uk-card-body">
+          Franken UI is an independent project free for everyone. Help support
+          it and expand its component library.
+        </div>
+        <div class="uk-card-footer flex items-center gap-x-4">
+          <a
+            class="uk-btn uk-btn-secondary uk-btn-sm"
+            href="https://github.com/sponsors/sveltecult"
+            target="_blank"
+          >
+            Sponsor
+          </a>
+          <a
+            class="uk-btn uk-btn-text uk-btn-sm"
+            href="mailto:sveltecult@proton.me"
+          >
+            Reach out
+          </a>
+        </div>
+      </div>
+
+      <ul class="uk-tab-alt mt-4">
+        <li><a href="https://franken-ui.dev">Uno</a></li>
+        <li class="uk-active"><a>Dos</a></li>
+      </ul>
+
+      <div class="mt-4 flex justify-center">
+        <span class="uk-label">{franken}</span>
+      </div>
+    </aside>
+
+    <main class="main">
+      <div class="topbar">
+        <div class="flex flex-1 items-center justify-between xl:pr-56">
+          <button
+            class="uk-btn uk-btn-default uk-btn-icon uk-btn-xs lg:hidden"
+            x-data
+            x-on:click="document.getElementById('app')?.classList.add('with-aside')"
+          >
+            <uk-icon icon="menu"></uk-icon>
+          </button>
+        </div>
+      </div>
+
+      <div class="content" id="content">
+        <div class="content-wrapper">
+          <h1 class="uk-h1">
+            {entry.data.title}
+          </h1>
+          <div class="mt-2 flex items-center gap-x-2">
+            <button
+              class="uk-btn uk-btn-default uk-btn-icon uk-btn-xs"
+              data-uk-toggle="target: #theme"
+            >
+              <span class="size-4">
+                <uk-icon icon="palette"></uk-icon>
+              </span>
+            </button>
+            <a
+              class="uk-btn uk-btn-default uk-btn-xs"
+              href="https://github.com/franken-ui/ui/issues"
+              target="_blank"
+            >
+              Report issue
+              <span class="ml-2 size-4">
+                <uk-icon icon="external-link"></uk-icon>
+              </span>
+            </a>
+          </div>
+
+          {
+            entry.data.lead ? (
+              <p class="uk-text-lead uk-paragraph">{entry.data.lead}</p>
+            ) : (
+              ""
+            )
+          }
+
+          {
+            entry.data.wip === true ? (
+              <div class="uk-alert-warning uk-alert mt-6">
+                This documentation is a work in progress.
+              </div>
+            ) : (
+              <div class="mt-6 flex min-h-40 items-center justify-center">
+                <Carbon />
+              </div>
+            )
+          }
+
+          <Content />
+        </div>
+
+        <div class="hidden w-56 xl:block">
+          <div class="space-y-6 pt-10" data-uk-sticky>
+            {
+              headings.length > 0 ? (
+                <ul
+                  class="uk-nav uk-nav-default"
+                  data-uk-scrollspy-nav="closest: li; scroll: true;"
+                >
+                  <li class="uk-nav-header">On This Page</li>
+                  {headings
+                    .filter((a) => a.depth === 2)
+                    .map((a) => (
+                      <li>
+                        <a href={`#${a.slug}`}>{a.text}</a>
+                      </li>
+                    ))}
+                </ul>
+              ) : (
+                ""
+              )
+            }
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <div
+      class="backdrop cursor-pointer"
+      id="backdrop"
+      role="button"
+      tabindex="0"
+      x-data
+      x-on:click="document.getElementById('app')?.classList.remove('with-aside')"
+    >
+    </div>
+  </div>
+
+  <iframe
+    name="ls"
+    class="hidden"
+    width="0"
+    height="0"
+    src={`${import.meta.env.FRAMES_URL}/ls`}></iframe>
+
+  <script is:inline>
+    window.addEventListener("resize", () => {
+      document.getElementById("app")?.classList.remove("with-aside");
+    });
+
+    const asideL = document.querySelector(".aside-l");
+
+    const navSub = asideL.querySelector("li.uk-parent.uk-open");
+    const focused = navSub.querySelector("li.uk-active");
+
+    const rects = {
+      asideL: asideL.getBoundingClientRect(),
+      focused: focused.getBoundingClientRect(),
+    };
+
+    const scrollTop =
+      focused.offsetTop -
+      asideL.offsetTop -
+      rects.asideL.height / 2 +
+      rects.focused.height / 2;
+
+    asideL.scrollTo({
+      top: scrollTop,
+      behavior: "smooth",
+    });
+
+    const content = document.getElementById("content");
+
+    content.addEventListener("click", function (event) {
+      if (event.target.classList.contains("c")) {
+        let target = event.target.closest("div");
+
+        if (target) {
+          const code = target.querySelector("code");
+
+          if (code) {
+            navigator.clipboard
+              .writeText(code.textContent)
+              .then(() => {
+                UIkit.notification({
+                  message: "Copied to clipboard",
+                  pos: "bottom-right",
+                });
+              })
+              .catch(() => {});
+          }
+        }
+      }
+    });
+
+    const iframe = window.frames["ls"];
+
+    const observer = new MutationObserver(() => {
+      iframe.postMessage({ classList: Array.from(htmlElement.classList) }, "*");
+    });
+
+    observer.observe(htmlElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+  </script>
+</Master>

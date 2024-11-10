@@ -1,0 +1,55 @@
+<div>
+  <table className="uk-table-sm uk-table uk-table-divider">
+    <thead>
+      <tr>
+        <th>Table Heading</th>
+        <th>Table Heading</th>
+        <th>Table Heading</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Table Data</td>
+        <td>Table Data</td>
+        <td>Table Data</td>
+      </tr>
+      <tr>
+        <td>Table Data</td>
+        <td>Table Data</td>
+        <td>Table Data</td>
+      </tr>
+      <tr>
+        <td>Table Data</td>
+        <td>Table Data</td>
+        <td>Table Data</td>
+      </tr>
+    </tbody>
+  </table>
+  <table className="uk-table-lg uk-table uk-table-divider mt-4">
+    <thead>
+      <tr>
+        <th>Table Heading</th>
+        <th>Table Heading</th>
+        <th>Table Heading</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Table Data</td>
+        <td>Table Data</td>
+        <td>Table Data</td>
+      </tr>
+      <tr>
+        <td>Table Data</td>
+        <td>Table Data</td>
+        <td>Table Data</td>
+      </tr>
+      <tr>
+        <td>Table Data</td>
+        <td>Table Data</td>
+        <td>Table Data</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+

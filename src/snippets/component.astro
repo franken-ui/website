@@ -1,0 +1,80 @@
+---
+import { resolve } from "node:path";
+import { readdirSync, readFileSync } from "node:fs";
+import { Code } from "astro-expressive-code/components";
+
+const { nopreview = false, version = "2.0", component } = Astro.props;
+
+const path = component.replace(".", "/");
+const map: { [key: string]: { tab: string; lang: string } } = {
+  ".html": {
+    tab: "HTML",
+    lang: "html",
+  },
+  ".jsx": {
+    tab: "JSX",
+    lang: "jsx",
+  },
+  ".svelte": {
+    tab: "Svelte",
+    lang: "svelte",
+  },
+};
+
+const codes = readdirSync(resolve("src", "snippets", version, path)).map(
+  (a) => {
+    const extension = a.match(/\.[^.]+$/) as RegExpMatchArray;
+
+    return Object.assign(map[extension[0] as ".html"], {
+      snippet: readFileSync(
+        resolve("src", "snippets", version, path, a),
+        "utf-8",
+      ),
+    });
+  },
+);
+
+const preview = codes.find((a) => a.lang === "html")?.snippet;
+---
+
+<div class="snippet mt-10">
+  <ul class="uk-tab" data-uk-tab>
+    {
+      nopreview !== true && preview !== undefined ? (
+        <li>
+          <a href="#">Preview</a>
+        </li>
+      ) : (
+        ""
+      )
+    }
+    {
+      codes.map((a) => (
+        <li>
+          <a href="#">{a.tab}</a>
+        </li>
+      ))
+    }
+  </ul>
+
+  <ul class="uk-switcher mt-4">
+    {
+      nopreview !== true && preview !== undefined ? (
+        <li>
+          <div class="preview">
+            <Fragment set:html={preview} />
+          </div>
+        </li>
+      ) : (
+        ""
+      )
+    }
+    {
+      codes.map((a) => (
+        <li>
+          <Code code={a.snippet} lang={a.lang} />
+        </li>
+      ))
+    }
+  </ul>
+</div>

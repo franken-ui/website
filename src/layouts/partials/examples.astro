@@ -1,0 +1,63 @@
+---
+import { Image } from "astro:assets";
+import data from "layouts/partials/examples";
+
+const { active } = Astro.props;
+
+const example = data.find((a) => a.slug === active);
+
+const images = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/images/examples/*.{jpeg,jpg,png,gif}",
+);
+const image = (await images[`/src/images/examples/${active}-light.png`]())
+  .default;
+---
+
+<div id="example">
+  <div class="uk-rounded uk-shadow mt-10 overflow-hidden border border-border">
+    <iframe
+      class="hidden xl:block"
+      name={active}
+      src={`${import.meta.env.FRAMES_URL}/examples/${active}`}
+      height={`${example?.height}`}
+      width="100%"></iframe>
+
+    <div class="xl:hidden">
+      <div class="dark:hidden">
+        <Image
+          alt=""
+          sizes={`(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1600px) 720px, ${image.width}px`}
+          src={images[`/src/images/examples/${active}-light.png`]()}
+          widths={[240, 540, 720, image.width]}
+        />
+      </div>
+
+      <div class="hidden dark:block">
+        <Image
+          alt=""
+          sizes={`(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1600px) 720px, ${image.width}px`}
+          src={images[`/src/images/examples/${active}-dark.png`]()}
+          widths={[240, 540, 720, image.width]}
+        />
+      </div>
+    </div>
+  </div>
+
+  <div role="alert" class="uk-alert-warning uk-alert mt-4 xl:hidden">
+    <strong>Note:</strong> You are viewing a static image preview. Please switch
+    to a larger screen to experience the real thing.
+  </div>
+
+  <script is:inline define:vars={{ active }}>
+    const iframe = window.frames[active];
+
+    const observer = new MutationObserver(() => {
+      iframe.postMessage({ classList: Array.from(htmlElement.classList) }, "*");
+    });
+
+    observer.observe(htmlElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+  </script>
+</div>

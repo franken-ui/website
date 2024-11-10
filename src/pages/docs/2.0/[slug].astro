@@ -1,0 +1,22 @@
+---
+import type { GetStaticPaths } from "astro";
+import { getCollection } from "astro:content";
+import Docs from "layouts/docs.astro";
+
+export const getStaticPaths = (async () => {
+  const docs = await getCollection("2.0");
+
+  return docs.map((a) => {
+    return {
+      params: {
+        slug: a.id,
+      },
+      props: { id: a.id },
+    };
+  });
+}) satisfies GetStaticPaths;
+
+const { id } = Astro.props;
+---
+
+<Docs version="2.0" id={id} />

@@ -1,0 +1,4 @@
+<div className="flex h-80 items-center justify-center bg-cover" data-src="https://images.unsplash.com/photo-1490822180406-880c226c150b?fit=crop&w=650&h=433&q=80" data-uk-img>
+  <h1 className="uk-h1 text-white">Background Image</h1>
+</div>
+

@@ -1,0 +1,234 @@
+---
+group: components
+text: Nav
+title: Nav
+lead: Defines different styles for list navigations.
+meta:
+  description: Defines different styles for list navigations.
+---
+
+import Snippet from "snippets/component.astro";
+
+## Usage
+
+To apply this component, use the following classes.
+
+| Class         | Description                                                                                                      |
+| ------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `.uk-nav`     | Add this class to a `<ul>` element to define the Nav component. Use `<a>` elements as nav items within the list. |
+| `.uk-active ` | Add this class to a list item to apply an active state to a menu item.                                           |
+
+```html
+<ul class="uk-nav">
+  <li class="uk-active"><a href=""></a></li>
+  <li><a href=""></a></li>
+</ul>
+```
+
+<Snippet component="nav.basic" />
+
+<span class="uk-label uk-label-primary">Note</span> By default, the nav has no
+styling. That's why it is important to add a modifier class. In our example we
+are using the `.uk-nav-default` class.
+
+## Nested navs
+
+Add the `.uk-parent` class to an item to turn it into a parent. Add the `.uk-nav-sub` class to a `<ul>` element inside the item to create the subnav.
+
+```html
+<ul class="uk-nav">
+  <li class="uk-parent">
+    <a href=""></a>
+    <ul class="uk-nav-sub">
+      <li><a href=""></a></li>
+      <li>
+        <a href=""></a>
+        <ul>
+          ...
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+```
+
+<Snippet component="nav.nested" />
+
+## Accordion
+
+By default, child menu items are always visible. To apply an accordion effect, just add the `data-uk-nav` attribute to the main `<ul>`.
+
+<span class="uk-label uk-label-primary">Note</span> The attribute automatically
+sets the `.uk-nav` class, so you don't have to apply it manually.
+
+```html
+<ul uk-nav>
+  ...
+</ul>
+```
+
+<Snippet component="nav.accordion" />
+
+### Parent icon
+
+To create a parent icon, just add the `data-uk-nav-parent-icon` attribute to a `<span>` element.
+
+```html
+<ul data-uk-nav>
+  <li>
+    <a href="">Parent <span data-uk-nav-parent-icon></span></a>
+    ...
+  </li>
+</ul>
+```
+
+<Snippet component="nav.parent_icon" />
+
+### Multiple open subnavs
+
+When clicking on a parent item, an open one will close, allowing only one open nested list at a time. To allow multiple open subnavs, just add the `multiple: true` option to the attribute.
+
+```html
+<ul data-uk-nav="multiple: true">
+  ...
+</ul>
+```
+
+<Snippet component="nav.multiple_open" />
+
+## Header and divider
+
+Add one of the following classes to a list item to create a header or a divider between items.
+
+| Element           | Description                                                                  |
+| ----------------- | ---------------------------------------------------------------------------- |
+| `.uk-nav-header`  | Add this class to a `<li>` element to create a header.                       |
+| `.uk-nav-divider` | Add this class to a `<li>` element to create a divider separating nav items. |
+
+```html
+<li class="uk-nav-header"></li>
+
+<li class="uk-nav-divider"></li>
+```
+
+<Snippet component="nav.header_divider" />
+
+## Subtitle
+
+Add the `.uk-nav-subtitle` class to a `div` element to create an item subtitled.
+
+```html
+<ul class="uk-nav">
+  <li>
+    <a href="">
+      <div>
+        Item
+        <div class="uk-nav-subtitle">
+          Subtitle lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+          do.
+        </div>
+      </div>
+    </a>
+  </li>
+</ul>
+```
+
+<Snippet component="nav.subtitle" />
+
+## Default modifier
+
+Add the `.uk-nav-default` class to give the nav its default style. You can place the nav inside cards or anywhere else in your content.
+
+```html
+<ul class="uk-nav uk-nav-default">
+  ...
+</ul>
+```
+
+<Snippet component="nav.default" />
+
+## Primary modifier
+
+Add the `.uk-nav-primary` class to give the nav a more distinct styling, for example when placing it inside a modal.
+
+```html
+<ul class="uk-nav uk-nav-primary">
+  ...
+</ul>
+```
+
+<Snippet component="nav.primary" />
+
+## Secondary modifier
+
+Add the `.uk-nav-secondary` class to have an extra style if the nav has subtitles.
+
+```html
+<ul class="uk-nav uk-nav-secondary">
+  ...
+</ul>
+```
+
+<Snippet component="nav.secondary" />
+
+## Nav in Dropdown
+
+Add the `.uk-dropdown-nav` class to place a nav inside a default dropdown from the [Dropdown component](/docs/2.0/dropdown).
+
+```html
+<div data-uk-dropdown>
+  <ul class="uk-dropdown-nav uk-nav">
+    ...
+  </ul>
+</div>
+```
+
+<Snippet component="nav.nav_in_dropdown" />
+
+## Nav in offcanvas
+
+A nav can be used inside an offcanvas from the [Offcanvas component](/docs/2.0/offcanvas). No modifier class needs to be added.
+
+<Snippet component="nav.nav_in_offcanvas" />
+
+## Component options
+
+Any of these options can be applied to the component attribute. Separate multiple options with a semicolon. [Learn more](/docs/2.0/javascript#component-configuration)
+
+| Option        | Value           | Default        | Description                                                                                |
+| ------------- | --------------- | -------------- | ------------------------------------------------------------------------------------------ |
+| `targets`     | CSS selector    | `> .uk-parent` | The element(s) to toggle.                                                                  |
+| `toggle `     | CSS selector    | `> a`          | The toggle element(s).                                                                     |
+| `content`     | CSS selector    | `> ul`         | The content element(s).                                                                    |
+| `collapsible` | Boolean         | `true`         | Allow all items to be closed.                                                              |
+| `multiple`    | Boolean         | `false`        | Allow multiple open items.                                                                 |
+| `transition`  | String          | `ease`         | The transition to use.                                                                     |
+| `animation`   | Boolean, String | `true`         | Space-separated names of [animations](/docs/2.0/animation). Comma-separated for animation out. |
+| `duration`    | Number          | `200`          | The animation duration in milliseconds.                                                    |
+
+## JavaScript
+
+Learn more about [JavaScript components](javascript.md#programmatic-use).
+
+### Initialization
+
+```javascript
+UIkit.nav(element, options);
+```
+
+### Methods
+
+The following methods are available for the component:
+
+#### Toggle
+
+```javascript
+UIkit.nav(element).toggle(index, animate);
+```
+
+Toggles the content pane.
+
+| Name      | Type                 | Default | Description                                  |
+| --------- | -------------------- | ------- | -------------------------------------------- |
+| `index`   | String, Number, Node | 0       | Nav pane to toggle. 0 based index.           |
+| `animate` | Boolean              | true    | Suppress opening animation by passing false. |

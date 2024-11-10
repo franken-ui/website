@@ -1,3 +1,168 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.backdrop {
+  @apply pointer-events-none fixed inset-0 z-40 bg-black/80 opacity-0 backdrop-blur-sm transition-opacity duration-500;
+}
+
+.aside-l {
+  transition-property: transform, width;
+
+  @apply fixed z-[1000] h-full w-full flex-none -translate-x-full overflow-y-auto border-e border-border bg-background p-4 duration-300 ease-in-out md:w-64 lg:translate-x-0 xl:pl-0;
+}
+
+.aside-l .search {
+  border-radius: var(--uk-global-radius);
+
+  @apply flex h-9 w-full items-center justify-between border border-border bg-muted/50 px-3 text-muted-foreground hover:bg-accent hover:text-accent-foreground;
+}
+
+.aside-l .search > kbd {
+  @apply uk-kbd hidden flex-none lg:inline-block;
+}
+
+.aside-l .nav {
+  @apply space-y-1;
+}
+
+.aside-l .item {
+  @apply inline-flex items-center gap-4 rounded-full p-3 text-accent-foreground hover:bg-accent;
+}
+
+.aside-l .item.primary {
+  @apply bg-primary text-primary-foreground hover:bg-primary/80;
+}
+
+.aside-l .item .text {
+  @apply mr-4 text-xl lg:hidden xl:inline;
+}
+
+.main {
+  @apply flex-1 lg:ml-64;
+}
+
+.topbar {
+  @apply fixed top-0 z-20 flex h-14 w-full items-center border-b border-border bg-background/80 px-4 text-foreground backdrop-blur-sm lg:hidden;
+}
+
+.content {
+  @apply pt-14 lg:pt-0 xl:flex;
+}
+
+.content-wrapper {
+  @apply px-4 py-8 lg:px-6 lg:py-12 xl:flex-1;
+}
+
+.with-aside {
+  @apply overflow-hidden lg:overflow-auto;
+}
+
+.with-aside .backdrop {
+  @apply pointer-events-auto md:opacity-100;
+}
+
+.with-aside .aside-l {
+  @apply translate-x-0;
+}
+
+.with-sidebar .main {
+  @apply md:-ml-0;
+}
+
+body {
+  @apply bg-background font-geist-sans text-foreground antialiased;
+}
+
+body:has(> div.with-aside) {
+  @apply overflow-hidden;
+}
+
+.uk-paragraph code,
+.uk-table code,
+.uk-list code {
+  @apply uk-codespan font-geist-mono;
+}
+
+.uk-paragraph kbd,
+.uk-table kbd,
+.uk-list kbd {
+  @apply uk-kbd font-geist-mono;
+}
+
+.uk-alert-warning {
+  @apply border-amber-200 bg-amber-50 dark:border-amber-950 dark:bg-amber-950/50;
+}
+
+#uk-slider-navigation-outside {
+  @apply sm:mx-10;
+}
+
+@screen md {
+  .preview {
+    @apply border-b border-border pb-10 pt-6;
+  }
+}
+
+@screen xl {
+  .content-wrapper {
+    max-width: calc(100% - 16rem);
+  }
+}
+
+.expressive-code:not(.snippet *) {
+  @apply mt-10;
+}
+
+.expressive-code {
+  --ec-uiFontFml: Geist Sans, ui-sans-serif, system-ui, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --ec-codeFontFml: Geist Mono, ui-monospace, SFMono-Regular, Menlo, Monaco,
+    Consolas, "Liberation Mono", "Courier New", monospace;
+  --ec-codeFontSize: 0.875rem;
+  --ec-codeLineHt: 1.25rem;
+}
+
+.expressive-code .frame {
+  --header-border-radius: var(--uk-global-radius);
+  --ec-frm-frameBoxShdCssVal: var(--uk-global-shadow);
+}
+
+.expressive-code pre {
+  --code-background: hsl(var(--card));
+  --ec-brdCol: hsl(var(--border));
+}
+
+.expressive-code .copy .feedback {
+  --ec-frm-tooltipSuccessBg: hsl(var(--primary));
+  --ec-frm-tooltipSuccessFg: hsl(var(--primary-foreground));
+}
+
+#carbon-responsive {
+  --carbon-padding: 1rem;
+  --carbon-bg-primary: hsl(0 0% 100%) !important;
+  --carbon-bg-secondary: hsl(240 5.9% 90%) !important;
+  --carbon-text-color: hsl(240 10% 3.9%) !important;
+}
+
+.dark #carbon-responsive {
+  --carbon-bg-primary: hsl(240 10% 3.9%) !important;
+  --carbon-bg-secondary: hsl(240 3.7% 15.9%) !important;
+  --carbon-text-color: hsl(0 0% 98%) !important;
+}
+
+#carbon-responsive .carbon-responsive-wrap {
+  @apply rounded-md shadow-sm;
+}
+
+#carbon-responsive .carbon-responsive-wrap > .carbon-img {
+  @apply overflow-hidden rounded-sm;
+}
+
+#carbon-responsive .carbon-responsive-wrap > .carbon-text {
+  @apply flex items-center font-geist-sans;
+}
+
+#carbon-responsive .carbon-poweredby {
+  @apply font-geist-sans text-xs font-medium uppercase tracking-wide;
+}

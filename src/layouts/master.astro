@@ -1,0 +1,152 @@
+---
+import "css/app.css";
+import core from "franken-ui/js/core.iife?url";
+import icon from "franken-ui/js/icon.iife?url";
+
+const { doc } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{doc.title}</title>
+    <link
+      rel="preload"
+      href="/fonts/geist-font/fonts/GeistVariableVF.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/geist-font/fonts/GeistMonoVariableVF.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="stylesheet" href="/fonts/geist-font/style.css" />
+
+    <script is:inline>
+      const htmlElement = document.documentElement;
+
+      const __FRANKEN__ = JSON.parse(
+        localStorage.getItem("__FRANKEN__") || "{}",
+      );
+
+      if (
+        __FRANKEN__.mode === "dark" ||
+        (!__FRANKEN__.mode &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches)
+      ) {
+        htmlElement.classList.add("dark");
+        htmlElement.dataset.theme = "github-dark";
+      } else {
+        htmlElement.classList.remove("dark");
+        htmlElement.dataset.theme = "github-light";
+      }
+
+      htmlElement.classList.add(__FRANKEN__.theme || "uk-theme-zinc");
+      htmlElement.classList.add(__FRANKEN__.radii || "uk-radii-md");
+      htmlElement.classList.add(__FRANKEN__.shadows || "uk-shadows-sm");
+      htmlElement.classList.add(__FRANKEN__.font || "uk-font-sm");
+    </script>
+
+    {
+      doc.meta &&
+        Object.keys(doc.meta).map((key) => (
+          <meta name={key} content={doc.meta[key]} />
+        ))
+    }
+
+    <link rel="shortcut icon" href="/images/man_zombie_3d.png" />
+    <link rel="icon" href="/images/man_zombie_3d.png" />
+    <link rel="apple-touch-icon" href="/images/man_zombie_3d.png" />
+
+    <script is:inline src={core} type="module"></script>
+    <script is:inline src={icon} type="module"></script>
+  </head>
+  <body>
+    <slot />
+
+    <div
+      class="uk-offcanvas"
+      data-uk-offcanvas="flip: true; overlay: true"
+      id="theme"
+      style="--uk-offcanvas-bar-width: 320px;--uk-offcanvas-bar-width-i: -320px;"
+    >
+      <div class="uk-offcanvas-bar p-4">
+        <div class="uk-h3">Customize</div>
+        <p class="mb-4 mt-1 text-sm text-muted-foreground">
+          Customize your Franken UI experience.
+        </p>
+        <uk-theme-switcher id="theme-switcher">
+          <select hidden>
+            <optgroup data-key="theme" label="Theme">
+              <option data-hex="#52525b" value="uk-theme-zinc" selected
+                >Zinc</option
+              >
+              <option data-hex="#64748b" value="uk-theme-slate">Slate</option>
+              <option data-hex="#78716c" value="uk-theme-stone">Stone</option>
+              <option data-hex="#6b7280" value="uk-theme-gray">Gray</option>
+              <option data-hex="#737373" value="uk-theme-neutral"
+                >Neutral</option
+              >
+              <option data-hex="#dc2626" value="uk-theme-red">Red</option>
+              <option data-hex="#e11d48" value="uk-theme-rose">Rose</option>
+              <option data-hex="#f97316" value="uk-theme-orange">Orange</option>
+              <option data-hex="#16a34a" value="uk-theme-green">Green</option>
+              <option data-hex="#2563eb" value="uk-theme-blue">Blue</option>
+              <option data-hex="#facc15" value="uk-theme-yellow">Yellow</option>
+              <option data-hex="#7c3aed" value="uk-theme-violet">Violet</option>
+            </optgroup>
+            <optgroup data-key="radii" label="Radii">
+              <option value="uk-radii-none">None</option>
+              <option value="uk-radii-sm">Small</option>
+              <option value="uk-radii-md" selected>Medium</option>
+              <option value="uk-radii-lg">Large</option>
+            </optgroup>
+            <optgroup data-key="shadows" label="Shadows">
+              <option value="uk-shadows-none">None</option>
+              <option value="uk-shadows-sm" selected>Small</option>
+              <option value="uk-shadows-md">Medium</option>
+              <option value="uk-shadows-lg">Large</option>
+            </optgroup>
+            <optgroup data-key="font" label="Font">
+              <option value="uk-font-sm" selected>Small</option>
+              <option value="uk-font-base">Default</option>
+            </optgroup>
+            <optgroup data-key="mode" label="Mode">
+              <option data-icon="sun" value="light">Light</option>
+              <option data-icon="moon" value="dark">Dark</option>
+            </optgroup>
+          </select>
+        </uk-theme-switcher>
+        <script is:inline>
+          const ts = document.getElementById("theme-switcher");
+
+          ts?.addEventListener("uk-theme-switcher:change", (e) => {
+            if (e.detail.value.mode === "light") {
+              htmlElement.dataset.theme = "github-light";
+            } else {
+              htmlElement.dataset.theme = "github-dark";
+            }
+          });
+        </script>
+      </div>
+    </div>
+
+    <script is:inline src="/js/alpinejs@3.14.1/alpine.min.js"></script>
+    <script is:inline src="/js/htmx@2.0.3/htmx.min.js"></script>
+    <script is:inline>
+      document.addEventListener("uikit:init", () => {
+        UIkit.notification({
+          message: "Please do not use this in production.",
+          status: "destructive",
+          timeout: 0,
+        });
+      });
+    </script>
+  </body>
+</html>

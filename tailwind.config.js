@@ -8,9 +8,16 @@ export default {
     {
       pattern: /^uk-/,
     },
+    "mt-6",
+    "mt-10",
+    "text-base",
   ],
   theme: {
-    extend: {},
+    extend: {
+      maxWidth: {
+        "8xl": "90rem",
+      },
+    },
   },
   plugins: [],
 };
