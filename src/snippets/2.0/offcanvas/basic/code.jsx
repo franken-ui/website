@@ -6,7 +6,7 @@
   >
     Open
   </button>
-  <div id="offcanvas-usage" data-uk-offcanvas>
+  <div className="uk-offcanvas" id="offcanvas-usage" data-uk-offcanvas>
     <div className="uk-padding uk-offcanvas-bar">
       <button className="uk-offcanvas-close" type="button" data-uk-close />
       <h3 className="uk-h3">Title</h3>

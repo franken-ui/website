@@ -72,6 +72,28 @@ const preview = codes.find((a) => a.lang === "html")?.snippet;
     {
       codes.map((a) => (
         <li>
+          <div class="uk-text-sm mb-4 flex items-center justify-center gap-x-2 text-muted-foreground">
+            <uk-icon icon="lightbulb" />
+            <p>
+              Something's not working? Feel free to{" "}
+              <a
+                class="uk-link"
+                href="https://github.com/franken-ui/website/issues/new"
+                target="_blank"
+              >
+                report an issue
+              </a>{" "}
+              or{" "}
+              <a
+                class="uk-link"
+                href={`https://github.com/franken-ui/website/tree/master/src/snippets/${version}/${path}/code.${a.lang}`}
+                target="_blank"
+              >
+                edit this snippet
+              </a>
+              .
+            </p>
+          </div>
           <Code code={a.snippet} lang={a.lang} />
         </li>
       ))
