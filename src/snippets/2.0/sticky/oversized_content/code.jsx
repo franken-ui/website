@@ -54,7 +54,7 @@
     </div>
   </div>
   <div>
-    <div className="uk-padding uk-background-muted">
+    <div className="uk-background-muted">
       <h3 className="uk-h3">Headline 1</h3>
       <p className="uk-paragraph">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod

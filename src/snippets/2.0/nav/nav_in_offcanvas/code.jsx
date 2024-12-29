@@ -7,7 +7,7 @@
     Open
   </button>
   <div className="uk-offcanvas" id="offcanvas-slide" data-uk-offcanvas>
-    <div className="uk-padding-remove uk-offcanvas-bar">
+    <div className="uk-offcanvas-bar">
       <ul className="uk-nav uk-nav-primary">
         <li className="uk-active">
           <a href="#">Active</a>

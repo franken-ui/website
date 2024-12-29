@@ -3,7 +3,7 @@
     Open
   </button>
   <div id="offcanvas-flip" data-uk-offcanvas="flip: true; overlay: true">
-    <div className="uk-padding uk-offcanvas-bar">
+    <div className="uk-offcanvas-bar">
       <button className="uk-offcanvas-close" type="button" data-uk-close />
       <h3 className="uk-h3">Title</h3>
       <p className="mt-4">

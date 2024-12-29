@@ -1,6 +1,6 @@
 <div>
   <button
-    className="uk-btn uk-btn-default mr-2"
+    className="uk-btn uk-btn-default"
     type="button"
     data-uk-toggle="target: #cmd2"
   >

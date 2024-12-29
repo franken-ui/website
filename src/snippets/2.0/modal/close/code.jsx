@@ -1,6 +1,6 @@
 <div>
   {/* This is a button toggling the modal with the default close button */}
-  <button className="uk-btn uk-btn-default mr-2" type="button" data-uk-toggle="target: #modal-close-default">
+  <button className="uk-btn uk-btn-default" type="button" data-uk-toggle="target: #modal-close-default">
     Open
   </button>
   {/* This is the modal with the default close button */}

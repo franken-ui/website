@@ -1,7 +1,7 @@
 <div>
   {/* This is a button toggling the modal */}
   <button
-    className="uk-btn uk-btn-default mr-2"
+    className="uk-btn uk-btn-default"
     type="button"
     data-uk-toggle="target: #modal-example"
   >
