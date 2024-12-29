@@ -8,7 +8,11 @@
   </button>
   <div id="modal-container" className="uk-modal-container" data-uk-modal>
     <div className="uk-modal-dialog uk-modal-body">
-      <button className="uk-modal-close-default" type="button" data-uk-close />
+      <button
+        className="uk-modal-close absolute right-4 top-4"
+        type="button"
+        data-uk-close
+      />
       <h2 className="uk-modal-title">Headline</h2>
       <p className="mt-4">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod

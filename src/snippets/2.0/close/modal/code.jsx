@@ -9,7 +9,7 @@
   <div className="uk-modal uk-flex-top" id="modal" data-uk-modal>
     <div className="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
       <button
-        className="uk-modal-close-default"
+        className="uk-modal-close absolute right-4 top-4"
         type="button"
         aria-label="Close"
         data-uk-close

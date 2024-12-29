@@ -8,7 +8,11 @@
   </button>
   <div className="uk-modal" id="theme-switcher-modal" data-uk-modal>
     <div className="uk-modal-dialog">
-      <button className="uk-modal-close-default" type="button" data-uk-close />
+      <button
+        className="uk-modal-close absolute right-4 top-4"
+        type="button"
+        data-uk-close
+      />
       <div className="uk-modal-header">
         <div className="uk-modal-title">Customize</div>
       </div>

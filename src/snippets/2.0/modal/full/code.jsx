@@ -8,7 +8,11 @@
   </button>
   <div id="modal-full" className="uk-modal-full" data-uk-modal>
     <div className="uk-modal-dialog">
-      <button className="uk-modal-close-full p-8" type="button" data-uk-close />
+      <button
+        className="uk-modal-close absolute right-0 top-0 p-8"
+        type="button"
+        data-uk-close
+      />
       <div className="grid md:grid-cols-2">
         <div
           className="h-screen bg-cover"

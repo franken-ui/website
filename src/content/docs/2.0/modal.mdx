@@ -40,20 +40,18 @@ Add the `data-uk-modal` attribute to a `<div>` element to create the modal conta
 
 ## Close button
 
-To create a close button, enable its functionality and add proper styling and positioning, add the `.uk-modal-close-default` class to an `<a>` or `<button>` element. To place the close button outside the modal, add the `.uk-modal-close-outside` class.
+To create a close button, enable its functionality and add proper styling and positioning, add the `.uk-modal-close` class to an `<a>` or `<button>` element.
 
 Add the `data-uk-close` attribute from the [Close component](/docs/2.0/close), to apply a close icon.
 
 ```html
 <div>
   <div class="uk-modal-dialog">
-    <button class="uk-modal-close-default" type="button" data-uk-close></button>
-  </div>
-</div>
-
-<div>
-  <div class="uk-modal-dialog">
-    <button class="uk-modal-close-outside" type="button" data-uk-close></button>
+    <button
+      class="uk-modal-close absolute right-4 top-4"
+      type="button"
+      data-uk-close
+    ></button>
   </div>
 </div>
 ```
@@ -87,7 +85,11 @@ To divide the modal into different content sections, use the following classes.
 ```html
 <div class="uk-modal" data-uk-modal>
   <div class="uk-modal-dialog">
-    <button class="uk-modal-close-default" type="button" data-uk-close></button>
+    <button
+      class="uk-modal-close absolute right-4 top-4"
+      type="button"
+      data-uk-close
+    ></button>
     <div class="uk-modal-header">
       <h2 class="uk-modal-title"></h2>
     </div>
@@ -111,16 +113,12 @@ Add the `.uk-modal-container` class to expand the modal dialog to the default [C
 
 ## Full modifier
 
-To create a modal, that fills the entire page, add the `.uk-modal-full` class. It is also recommended adding the `.uk-modal-close-full` class to the close button, so that it adapts its styling.
+To create a modal, that fills the entire page, add the `.uk-modal-full` class.
 
 ```html
 <div class="uk-modal uk-modal-full" data-uk-modal>
   <div class="uk-modal-dialog">
-    <button
-      class="uk-close-large uk-modal-close-full"
-      type="button"
-      data-uk-close
-    ></button>
+    <button class="uk-modal-close" type="button" data-uk-close></button>
   </div>
 </div>
 ```
@@ -181,15 +179,15 @@ You can group multiple modals by linking from one to the other and back. Use thi
 
 Any of these options can be applied to the component attribute. Separate multiple options with a semicolon. [Learn more](/docs/2.0/javascript#component-configuration)
 
-| Option      | Value   | Default                                                                                   | Description                                                                                                                                          |
-| ----------- | ------- | ----------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `esc-close` | Boolean | `true`                                                                                    | Close the modal when the _Esc_ key is pressed.                                                                                                       |
-| `bg-close`  | Boolean | `true`                                                                                    | Close the modal when the background is clicked.                                                                                                      |
-| `stack`     | Boolean | `false`                                                                                   | Stack modals, when more than one is open. By default, the previous modal will be hidden.                                                             |
-| `container` | String  | `true`                                                                                    | Define a target container via a selector to specify where the modal should be appended in the DOM. Setting it to `false` will prevent this behavior. |
-| `cls-page`  | String  | `uk-modal-page`                                                                           | Class to add to `<html>` when modal is active                                                                                                        |
-| `cls-panel` | String  | `uk-modal-dialog`                                                                         | Class of the element to be considered the panel of the modal                                                                                         |
-| `sel-close` | String  | `.uk-modal-close, .uk-modal-close-default, .uk-modal-close-outside, .uk-modal-close-full` | CSS selector for all elements that should trigger the closing of the modal                                                                           |
+| Option      | Value   | Default           | Description                                                                                                                                          |
+| ----------- | ------- | ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `esc-close` | Boolean | `true`            | Close the modal when the _Esc_ key is pressed.                                                                                                       |
+| `bg-close`  | Boolean | `true`            | Close the modal when the background is clicked.                                                                                                      |
+| `stack`     | Boolean | `false`           | Stack modals, when more than one is open. By default, the previous modal will be hidden.                                                             |
+| `container` | String  | `true`            | Define a target container via a selector to specify where the modal should be appended in the DOM. Setting it to `false` will prevent this behavior. |
+| `cls-page`  | String  | `uk-modal-page`   | Class to add to `<html>` when modal is active                                                                                                        |
+| `cls-panel` | String  | `uk-modal-dialog` | Class of the element to be considered the panel of the modal                                                                                         |
+| `sel-close` | String  | `.uk-modal-close` | CSS selector for all elements that should trigger the closing of the modal                                                                           |
 
 ## JavaScript
 
