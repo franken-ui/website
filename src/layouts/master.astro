@@ -139,14 +139,5 @@ const { doc } = Astro.props;
 
     <script is:inline src="/js/alpinejs@3.14.1/alpine.min.js"></script>
     <script is:inline src="/js/htmx@2.0.3/htmx.min.js"></script>
-    <script is:inline>
-      document.addEventListener("uikit:init", () => {
-        UIkit.notification({
-          message: "Please do not use this in production.",
-          status: "destructive",
-          timeout: 0,
-        });
-      });
-    </script>
   </body>
 </html>

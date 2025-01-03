@@ -154,14 +154,39 @@ const { doc } = Astro.props;
 
         <slot />
 
-        <div class="mt-20 text-center">
+        <div class="mt-20 text-center" id="sponsors">
           <div class="uk-h4">Supported by</div>
           <p class="mt-1 text-muted-foreground">
             Thanks to our amazing sponsors.
           </p>
         </div>
         <div class="mx-auto mt-10 max-w-sm">
-          <div class="grid grid-cols-2 gap-x-2">
+          <div class="grid grid-cols-2 gap-2">
+            <div
+              class="uk-rounded relative col-span-2 border border-border p-2"
+            >
+              <a
+                class="focus-visible:outline-dotted focus-visible:outline-ring"
+                href="https://tic.io"
+                target="_blank"
+                data-uk-tooltip="The Intelligence Company"
+              >
+                <svg viewBox="0 0 166 65" fill="none" class="w-full">
+                  <title>The Intelligence Company</title>
+                  <g
+                    clip-path="url(#prefix__clip0_323_206)"
+                    fill="currentColor"
+                  >
+                    <path
+                      d="M72.255 21.408h21.481V.074h-21.48v21.334zM166 .074h-42.962v21.334H166V.074z"
+                    ></path>
+                    <path
+                      d="M101.554 21.405V64.07h64.442V42.739h-42.961V21.405h-21.481zM0 42.74h21.48v21.334h21.482V42.741h21.48V21.408h-21.48V.074H21.48v21.334H0V42.74z"
+                    ></path>
+                  </g>
+                </svg>
+              </a>
+            </div>
             <div class="uk-rounded relative border border-border p-2">
               <a
                 class="focus-visible:outline-dotted focus-visible:outline-ring"
