@@ -149,6 +149,41 @@ To enable an action, for example opening a modal to pick an image or link, use a
 
 <Snippet component="form.clickable_icon" />
 
+## Custom controls
+
+To replace a file input or select forms with your own HTML content, like a button or text, add the `data-uk-form-custom` attribute to a container element.
+
+### File
+
+Use a button or text as a file input.
+
+```html
+<div data-uk-form-custom>
+    <input type="file">
+    <button type="button"></button>
+</div>
+```
+
+<Snippet component="form.custom_controls_file" />
+
+**Note** The hover and focus state for `uk-form-custom` are not styled by default, but you could use the adjacent sibling selector to do so.
+
+### Select
+
+Use a button, text or a link as a select form. Just add the `target: SELECTOR` option to the `uk-form-custom` attribute to select where the option value should be displayed. `target: true` will select the adjacent element in the markup.
+
+```html
+<div data-uk-form-custom="target: true">
+    <select>
+        <option></option>
+        <option></option>
+    </select>
+    <button type="button"></button>
+</div>
+```
+
+<Snippet component="form.custom_controls_select" />
+
 ## Help block
 
 Form text can be created using `.uk-form-help` and should be explicitly associated with the form control it relates to using the `aria-describedby` attribute. This will ensure that assistive technologies—such as screen readers—will announce this form text when the user focuses or enters the control.
