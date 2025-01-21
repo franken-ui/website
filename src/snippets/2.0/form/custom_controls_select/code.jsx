@@ -1,5 +1,5 @@
 <form>
-  <div className>
+  <div>
     <div data-uk-form-custom="target: true">
       <select aria-label="Custom controls">
         <option value={1}>Option 01</option>

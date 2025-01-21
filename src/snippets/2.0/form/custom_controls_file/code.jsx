@@ -1,5 +1,5 @@
 <form>
-  <div className>
+  <div>
     <div data-uk-form-custom>
       <input type="file" aria-label="Custom controls" />
       <button className="uk-btn uk-btn-default" type="button" tabIndex={-1}>

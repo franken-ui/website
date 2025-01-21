@@ -1,7 +1,7 @@
 <div className="max-w-sm">
   <ul className="uk-nav uk-nav-secondary">
     <li>
-      <a className>
+      <a>
         <div className="flex">
           <uk-icon width={20} height={20} icon="bell" />
           <div className="ml-2">
@@ -14,7 +14,7 @@
       </a>
     </li>
     <li className="uk-active">
-      <a className>
+      <a>
         <div className="flex">
           <uk-icon width={20} height={20} icon="user" />
           <div className="ml-2">
@@ -27,7 +27,7 @@
       </a>
     </li>
     <li>
-      <a className>
+      <a>
         <div className="flex">
           <uk-icon width={20} height={20} icon="eye-off" />
           <div className="ml-2">
@@ -41,4 +41,3 @@
     </li>
   </ul>
 </div>
-

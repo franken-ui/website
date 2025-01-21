@@ -6,21 +6,33 @@
     </p>
   </div>
   <div className="uk-card-body">
-    <div className>
-      <label className="uk-form-label" htmlFor="name">Name</label>
+    <div>
+      <label className="uk-form-label" htmlFor="name">
+        Name
+      </label>
       <div className="uk-form-controls mt-2">
-        <input className="uk-input" id="name" type="text" aria-describedby="name-help-block" placeholder="Name" />
+        <input
+          className="uk-input"
+          id="name"
+          type="text"
+          aria-describedby="name-help-block"
+          placeholder="Name"
+        />
         <div id="name-help-block" className="uk-form-help mt-2">
           The name of your project.
         </div>
       </div>
     </div>
     <div className="mt-4">
-      <label className="uk-form-label" htmlFor="framework">Framework</label>
+      <label className="uk-form-label" htmlFor="framework">
+        Framework
+      </label>
       <div className="uk-form-controls mt-2">
         <select className="uk-select" name="framework">
           <option value="sveltekit">Sveltekit</option>
-          <option value="astro" selected>Astro</option>
+          <option value="astro" selected>
+            Astro
+          </option>
         </select>
       </div>
     </div>
@@ -30,4 +42,3 @@
     <button className="uk-btn uk-btn-primary">Deploy</button>
   </div>
 </div>
-
