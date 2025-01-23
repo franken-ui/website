@@ -68,7 +68,7 @@ By default, the lightbox shows a slidenav from the [Slidenav component](/docs/2.
 
 ```html
 <div data-uk-lightbox="slidenav: false; nav: thumbnav">
-    <a href="image.jpg"></a>
+  <a href="image.jpg"></a>
 </div>
 ```
 
@@ -121,7 +121,7 @@ By default, the controls are hidden after a short time if the mouse doesn't move
 
 ```html
 <div uk-lightbox="delay-controls: 0">
-    <a href="image.jpg"></a>
+  <a href="image.jpg"></a>
 </div>
 ```
 
@@ -133,7 +133,7 @@ By default, the lightbox closes if the background is clicked. To prevent this be
 
 ```html
 <div uk-lightbox="bg-close: false">
-    <a href="image.jpg"></a>
+  <a href="image.jpg"></a>
 </div>
 ```
 
@@ -159,15 +159,19 @@ You can add custom attributes to lightbox content items by using the `data-attrs
 
 Any of these options can be applied to the component attribute. Separate multiple options with a semicolon. [Learn more](/docs/2.0/javascript#component-configuration)
 
-| Option              | Value          | Default | Description                                            |
-| ------------------- | -------------- | ------- | ------------------------------------------------------ |
-| `animation`         | String         | `slide` | Lightbox animation mode (`slide`, `fade` or `scale`).  |
-| `autoplay`          | Boolean        | `false` | Lightbox autoplays.                                    |
-| `autoplay-interval` | Number         | `7000`  | The delay between switching slides in autoplay mode.   |
-| `pause-on-hover`    | Boolean        | `false` | Pause autoplay mode on hover.                          |
-| `video-autoplay`    | Boolean        | `false` | Lightbox videos autoplay.                              |
-| `index`             | String, Number | `0`     | Lightbox item to show. 0 based index.                  |
-| `toggle`            | CSS selector   | `a`     | Toggle selector - opens the Lightbox Panel upon click. |
+| Option              | Value           | Default | Description                                                                                                |
+| ------------------- | --------------- | ------- | ---------------------------------------------------------------------------------------------------------- |
+| `animation`         | String          | `slide` | Lightbox animation mode (`slide`, `fade` or `scale`).                                                      |
+| `autoplay`          | Boolean         | `false` | Lightbox autoplays.                                                                                        |
+| `autoplay-interval` | Number          | `7000`  | The delay between switching slides in autoplay mode.                                                       |
+| `pause-on-hover`    | Boolean         | `false` | Pause autoplay mode on hover.                                                                              |
+| `video-autoplay`    | Boolean, String | `false` | Lightbox videos autoplay. A value of `inline` will autoplay the video, make it muted and without controls. |
+| `counter`           | Boolean         | `false` | Lightbox shows counter.                                                                                    |
+| `nav`               | Boolean, String | `false` | Lightbox navigation (`dotnav`, `thumbnav`).                                                                |
+| `slidenav`          | Boolean         | `true`  | Lightbox shows slidenav controls.                                                                          |
+| `index`             | String, Number  | `0`     | Lightbox item to show. 0 based index.                                                                      |
+| `delay-controls`    | Number          | `3000`  | Delay time before controls fade out in ms. Setting `0` will prevent hiding controls.                       |
+| `toggle`            | CSS selector    | `a`     | Toggle selector - opens the Lightbox Panel upon click.                                                     |
 
 ## JavaScript
 
@@ -207,20 +211,23 @@ Hides the Lightbox's Panel.
 
 If you only want to use the lightbox panel directly through the JS API, you can set the following options.
 
-| Option              | Value   | Default        | Description                                                                                           |
-| ------------------- | ------- | -------------- | ----------------------------------------------------------------------------------------------------- |
-| `animation`         | String  | `slide`        | Lightbox animation mode (`slide`, `fade` or `scale`).                                                 |
-| `autoplay`          | Boolean | `false`        | Lightbox autoplays.                                                                                   |
-| `autoplay-interval` | Number  | `7000`         | The delay between switching slides in autoplay mode.                                                  |
-| `pause-on-hover`    | Boolean | `false`        | Pause autoplay mode on hover.                                                                         |
-| `video-autoplay`    | Boolean | `false`        | Lightbox videos autoplay.                                                                             |
-| `index`             | Number  | `0`            | The initial item to show. (zero based)                                                                |
-| `velocity`          | Number  | `2`            | The animation velocity (pixel/ms).                                                                    |
-| `preload`           | Number  | `1`            | The number of items to preload. (left and right of the currently active item)                         |
-| `items`             | Array   | `[]`           | An array of items to display, e.g. `[{source: '/images/size1.jpg', caption: '900x600'}]`              |
-| `template`          | String  | Default markup | The template string.                                                                                  |
-| `delay-controls`    | Number  | `3000`         | Delay time before controls fade out in ms.                                                            |
-| `container`         | String  | `body`         | Define a target container via a selector to specify where the Lightbox should be appended in the DOM. |
+| Option              | Value           | Default        | Description                                                                                                |
+| ------------------- | --------------- | -------------- | ---------------------------------------------------------------------------------------------------------- |
+| `animation`         | String          | `slide`        | Lightbox animation mode (`slide`, `fade` or `scale`).                                                      |
+| `autoplay`          | Boolean         | `false`        | Lightbox autoplays.                                                                                        |
+| `autoplay-interval` | Number          | `7000`         | The delay between switching slides in autoplay mode.                                                       |
+| `pause-on-hover`    | Boolean         | `false`        | Pause autoplay mode on hover.                                                                              |
+| `video-autoplay`    | Boolean, String | `false`        | Lightbox videos autoplay. A value of `inline` will autoplay the video, make it muted and without controls. |
+| `counter`           | Boolean         | `false`        | Lightbox shows counter.                                                                                    |
+| `nav`               | Boolean, String | `false`        | Lightbox navigation (`dotnav`, `thumbnav`).                                                                |
+| `slidenav`          | Boolean         | `true`         | Lightbox shows slidenav controls.                                                                          |
+| `index`             | Number          | `0`            | The initial item to show. (zero-based)                                                                     |
+| `velocity`          | Number          | `2`            | The animation velocity (pixel/ms).                                                                         |
+| `preload`           | Number          | `1`            | The number of items to preload. (left and right of the currently active item)                              |
+| `items`             | Array           | `[]`           | An array of items to display, e.g. `[{source: 'images/size1.jpg', caption: '900x600'}]`                    |
+| `template`          | String          | Default markup | The template string.                                                                                       |
+| `delay-controls`    | Number          | `3000`         | Delay time before controls fade out in ms. Setting `0` will prevent hiding controls.                       |
+| `container`         | String          | `body`         | Define a target container via a selector to specify where the Lightbox should be appended in the DOM.      |
 
 ### Events
 
@@ -300,7 +307,7 @@ The Close component automatically sets the appropriate WAI-ARIA roles and proper
 
 ### Keyboard interaction
 
-The lightbox gallery can be accessed through keyboard using the following keys.
+The lightbox gallery can be accessed through the keyboard using the following keys.
 
 - The <kbd>left/right arrow</kbd> keys navigate through the slides. If the focus is on the last slide, it moves to the first slide.
 - The <kbd>home</kbd> or <kbd>end</kbd> keys move the focus to the first or last slide.
@@ -308,7 +315,7 @@ The lightbox gallery can be accessed through keyboard using the following keys.
 
 ### Internationalization
 
-The Lightbox component uses the following translation strings. Learn more about [translating components](/docs/2.0/accessibility#internationalization).
+The Lightbox component uses the following translation strings. Learn more about [translating components](accessibility.md#internationalization).
 
 | Key          | Default          | Description                             |
 | ------------ | ---------------- | --------------------------------------- |
