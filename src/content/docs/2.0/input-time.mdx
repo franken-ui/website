@@ -12,6 +12,8 @@ import Snippet from "snippets/component.astro";
 
 ## Usage
 
+<span class="uk-label uk-label-destructive">Warning</span> This is a brand new component. Please use it with caution and be aware that you may encounter unexpected behavior or errors. If you experience any issues or bugs, please file an issue report so that we can investigate and improve the component.
+
 The Input Time component is a web component built from scratch to allow users to easily select time in a 12-hour format, while outputting the selected time in a 24-hour format. To get started, simply use the `<uk-input-time>` markup in your HTML code.
 
 <Snippet component="input_time.basic" />
@@ -68,7 +70,6 @@ To prepopulate the Input Time component with an existing value, simply pass the 
 
 <Snippet component="input_time.prepopulated" />
 
-
 ## Size modifiers
 
 There are several size modifiers available. Just add one of the following classes to the `cls-custom` attribute to make the input smaller or larger.
@@ -104,17 +105,29 @@ When loading Web Components, there may be a brief delay before the content is fu
 </div>
 ```
 
+## Internationalization
+
+<Snippet component="input_time.i18n" />
+
+## Available options
+
+| Name | Description              |
+| ---- | ------------------------ |
+| `am` | Lets you customize "am". |
+| `pm` | Lets you customize "pm". |
+
 ## Attributes
 
 The following attributes are available for this component:
 
-| Name         | Type    | Default | Description                                                                          |
-| ------------ | ------- | ------- | ------------------------------------------------------------------------------------ |
-| `cls-custom` | String  |         | Allows you to add custom CSS classes.                                                |
-| `disabled`   | Boolean | false   | Disables all input fields, making the entire component read-only.                    |
-| `name`       | String  |         | Defines the name of the input, allowing you to capture its value on your server.     |
-| `now`        | Boolean | false   | Automatically set the current time as the default value.                             |
-| `value`      | String  |         | A time in 24-hour format that will be prepopulated in the input field.               |
+| Name         | Type    | Default | Description                                                                      |
+| ------------ | ------- | ------- | -------------------------------------------------------------------------------- |
+| `autofocus`  | Boolean | false   | Automatically focuses on the first input field when the component is rendered.   |
+| `cls-custom` | String  |         | Allows you to add custom CSS classes.                                            |
+| `disabled`   | Boolean | false   | Disables all input fields, making the entire component read-only.                |
+| `name`       | String  |         | Defines the name of the input, allowing you to capture its value on your server. |
+| `now`        | Boolean | false   | Automatically set the current time as the default value.                         |
+| `value`      | String  |         | A time in 24-hour format that will be prepopulated in the input field.           |
 
 ## Events
 
