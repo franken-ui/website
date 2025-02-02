@@ -30,35 +30,7 @@ There are several ways to capture values from the `<uk-input-time>` component. T
 
 If you're using a reactive framework like React, Vue, or Svelte, you can capture the value by assigning an ID to the `<uk-input-time>` component and listening for the `uk-input-time:input` event. Here's an example implementation in SvelteKit:
 
-```svelte
-<script lang="ts">
-	import { onMount } from 'svelte';
-
-	let value: string = $state('');
-
-	onMount(() => {
-		document.getElementById('time')?.addEventListener('uk-input-time:change', (e) => {
-			// @ts-ignore
-			value = e.detail.value;
-		});
-	});
-</script>
-
-<div class="uk-container mt-20 grid grid-cols-2 gap-4">
-	<div>
-		<div class="uk-h3">Form</div>
-		<div class="mt-4">
-			<uk-input-time id="time"></uk-input-time>
-		</div>
-	</div>
-	<div>
-		<div class="uk-h3">Result</div>
-		{#if value}
-			The time is: {value}
-		{/if}
-	</div>
-</div>
-```
+<Snippet component="input_time.state_binding" />
 
 ## Prepopulating values
 
